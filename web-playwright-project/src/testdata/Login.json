@@ -1,0 +1,6 @@
+{
+  "validUser": {
+    "email": "${APP_USERNAME}",
+    "password": "${APP_PASSWORD}"
+  }
+}
