@@ -1,0 +1,21 @@
+{
+  "firstName": "Test",
+  "lastName": "User",
+  "email": "testuser_1678886400@example.com",
+  "password": "${APP_PASSWORD}",
+  "invalidEmail": "invalid-email",
+  "mismatchedPassword": "differentPassword123!",
+  "existingUserEmail": "existing.user@example.com",
+  "existingUserFirstName": "Jane",
+  "existingUserLastName": "Doe",
+  "shortPassword": "short",
+  "shortPasswordEmail": "newuser@example.com",
+  "boundaryPassword": "12345678",
+  "boundaryUserEmail": "boundaryuser@example.com",
+  "boundaryUserLastName": "Boundary",
+  "secretPassword": "a-secret-password",
+  "xssFirstName": "<script>alert('XSS')</script>",
+  "keyboardUserFirstName": "Keyboard",
+  "keyboardUserLastName": "User",
+  "keyboardUserEmail": "keyboard.user_1678886400@example.com"
+}
