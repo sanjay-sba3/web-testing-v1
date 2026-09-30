@@ -85,6 +85,12 @@ Then('the URL should contain {string}', async function (this: CustomWorld, text:
   await expect(this.page).toHaveURL(new RegExp(escapeRegExp(text)));
 });
 
+// Retries until the URL no longer contains the text (e.g. waiting for a redirect away from
+// register.html), like every other expect.
+Then('the URL should not contain {string}', async function (this: CustomWorld, text: string) {
+  await expect(this.page).not.toHaveURL(new RegExp(escapeRegExp(text)));
+});
+
 // Browser (HTML5) validation -- `required`, type="email", min/max/minlength, pattern. For
 // pages that block submission with the browser's own popup instead of on-page error text.
 Then('the {string} field should be invalid', async function (this: CustomWorld, label: string) {
