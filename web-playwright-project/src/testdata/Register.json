@@ -1,0 +1,7 @@
+{
+  "validPassword": "ValidPassword123!",
+  "passwordA": "PasswordA123!",
+  "passwordB": "PasswordB456!",
+  "existingEmail": "existing.user@example.com",
+  "anyPassword": "MySecretPassword123"
+}
