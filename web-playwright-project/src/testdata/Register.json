@@ -1,0 +1,15 @@
+{
+  "user": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "{{random.email}}",
+    "password": "Password123!",
+    "xssFirstName": "<script>alert('XSS')</script>"
+  },
+  "validation": {
+    "invalidEmail": "{{negative.email}}",
+    "nonMatchingPassword": "Password456!",
+    "shortPassword": "Pass123",
+    "minLenPassword": "Pass1234"
+  }
+}
