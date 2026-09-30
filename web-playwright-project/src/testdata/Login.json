@@ -1,0 +1,22 @@
+{
+  "validCredentials": {
+    "email": "${APP_USERNAME}",
+    "password": "${APP_PASSWORD}"
+  },
+  "invalidCredentials": {
+    "email": "invalid_user_12345",
+    "password": "invalid_password_12345"
+  },
+  "emptyEmail": {
+    "email": "",
+    "password": "anypassword"
+  },
+  "emptyPassword": {
+    "email": "${APP_USERNAME}",
+    "password": ""
+  },
+  "xssAttempt": {
+    "email": "<script>alert('XSS')</script>",
+    "password": "anypassword"
+  }
+}
