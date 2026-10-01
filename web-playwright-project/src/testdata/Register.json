@@ -1,0 +1,7 @@
+{
+  "password": "ValidPassword123!",
+  "shortPassword": "short",
+  "minLengthPassword": "123456",
+  "minLength8Password": "12345678",
+  "differentPassword": "DifferentPassword456!"
+}
