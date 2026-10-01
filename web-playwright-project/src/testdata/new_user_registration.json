@@ -1,0 +1,7 @@
+{
+  "password": "${APP_PASSWORD}",
+  "mismatchedPassword": "aDifferentPassword123",
+  "existingEmail": "existing.user@example.com",
+  "wrongPassword": "wrongpassword123!",
+  "xssEmail": "<script>alert('xss')</script>"
+}
