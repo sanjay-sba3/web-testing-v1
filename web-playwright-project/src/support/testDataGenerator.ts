@@ -5,7 +5,9 @@ import { faker } from '@faker-js/faker';
 // same feature use the same kind of data. Values are generated when the test RUNS, never
 // baked in at generation time, so unique fields (email, username) never collide between runs.
 
-export type Strategy = 'positive' | 'negative' | 'boundary' | 'security';
+// 'random' is the same as 'positive' -- it's the name the {{random.x}} token uses, so a
+// step written as generateValue('email', 'random') works too.
+export type Strategy = 'positive' | 'random' | 'negative' | 'boundary' | 'security';
 
 const NUMERIC_KEY = /^id$|id$|count$|quantity|amount|number|age/;
 
@@ -18,13 +20,19 @@ function isNumericHint(key: string, hint?: string): boolean {
 
 // `field` is the data's name ("email", "firstName", "quantity"); `hint` is an optional type
 // ("number" | "boolean" | "string"), as in the API project's `| field | typeHint |` tables.
-export function generateValue(field: string, strategy: Strategy = 'positive', hint?: string): string | number | boolean {
+// Always a string: every generated value ends up typed into a field (fill() takes a string).
+export function generateValue(field: string, strategy: Strategy = 'positive', hint?: string): string {
+  return String(rawValue(field, strategy, hint));
+}
+
+function rawValue(field: string, strategy: Strategy, hint?: string): string | number | boolean {
   const key = field.toLowerCase();
   const isBoolean = hint === 'boolean';
   const isNumeric = !isBoolean && isNumericHint(key, hint);
 
   switch (strategy) {
     case 'positive':
+    case 'random':
       if (key.includes('email')) return faker.internet.email();
       if (key.includes('password')) return 'Pass@' + faker.internet.password({ length: 10 });
       if (key.includes('user') || key.includes('name')) return faker.internet.username();
@@ -44,6 +52,9 @@ export function generateValue(field: string, strategy: Strategy = 'positive', hi
       if (key.includes('sql')) return "' OR '1'='1";
       return isNumeric ? 9999999 : '<script>alert(1)</script>';
   }
+  // Never return undefined: a fill(undefined) fails far from the real cause ("expected string,
+  // got undefined"). TypeScript runs with strict off here, so an unknown name can reach this.
+  throw new Error(`Unknown test data strategy "${strategy}" -- use positive (or random), negative, boundary or security`);
 }
 
 const TOKEN = /\{\{(random|negative|boundary|security)\.([A-Za-z0-9_]+)\}\}/g;
@@ -53,5 +64,5 @@ const STRATEGY: Record<string, Strategy> = { random: 'positive', negative: 'nega
 // token with a freshly generated value -- each occurrence gets its OWN value, exactly like the
 // API project's {{random.field}}. Used by the shared steps and by loadTestData.
 export function resolveTokens(text: string): string {
-  return text.replace(TOKEN, (_, kind: string, field: string) => String(generateValue(field, STRATEGY[kind])));
+  return text.replace(TOKEN, (_, kind: string, field: string) => generateValue(field, STRATEGY[kind]));
 }
