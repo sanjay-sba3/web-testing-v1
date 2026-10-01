@@ -1,0 +1,10 @@
+{
+  "newUserEmail": "{{random.email}}",
+  "newUserPassword": "ValidPassword123!",
+  "mismatchedPassword": "DifferentPassword456!",
+  "invalidEmail": "{{negative.email}}",
+  "incorrectPassword": "IncorrectPassword123",
+  "unregisteredEmail": "{{random.email}}",
+  "anyPassword": "anyPassword123",
+  "xssPayload": "{{security.comment}}"
+}
