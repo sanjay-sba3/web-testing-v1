@@ -1,0 +1,6 @@
+{
+  "validPassword": "ValidPassword123!",
+  "mismatchedPassword": "DifferentPassword456!",
+  "incorrectPassword": "IncorrectPassword123",
+  "anyPassword": "anyPassword123"
+}
